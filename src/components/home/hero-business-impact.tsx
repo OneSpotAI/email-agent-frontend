@@ -23,7 +23,7 @@ export function HeroBusinessImpact() {
         }`}
       >
         <h2
-          className="text-[1.5rem] font-semibold leading-tight tracking-[-0.3px] text-ink"
+          className="text-[1.5rem] font-semibold leading-tight tracking-[-0.3px] text-cream"
           style={{ fontFamily: "'Fraunces', Georgia, serif" }}
         >
           Why FastQuote
@@ -32,12 +32,12 @@ export function HeroBusinessImpact() {
 
       <div className="flex flex-col items-stretch gap-[1.2rem] min-[821px]:flex-row min-[821px]:gap-[1.8rem]">
         <div
-          className={`flex min-w-0 flex-1 flex-col rounded-[2px] border-[1.5px] border-ink p-[1.6rem_1.8rem_1.8rem] max-[560px]:p-[1.3rem_1.3rem_1.5rem] ${fadeUp(
+          className={`flex min-w-0 flex-1 flex-col rounded-xl border border-[#3A3A35] p-[1.6rem_1.8rem_1.8rem] max-[560px]:p-[1.3rem_1.3rem_1.5rem] ${fadeUp(
             inView
           )}`}
-          style={{ backgroundColor: "color-mix(in srgb, hsl(var(--ink)) 2%, hsl(var(--cream)))", transitionDelay: "100ms" }}
+          style={{ backgroundColor: "#232320", transitionDelay: "100ms" }}
         >
-          <span className="mb-[1.6rem] text-[11.5px] font-bold uppercase tracking-[2.5px] text-ink">
+          <span className="mb-[1.6rem] text-[11.5px] font-bold uppercase tracking-[2.5px] text-[#9A998F]">
             Quoting manually
           </span>
           <div className="grid flex-1 gap-[1.5rem] [grid-auto-rows:1fr]">
@@ -46,8 +46,8 @@ export function HeroBusinessImpact() {
                 key={row.label}
                 className="flex items-baseline justify-between gap-[1.2rem] max-[560px]:flex-col max-[560px]:items-start max-[560px]:gap-[0.15rem]"
               >
-                <span className="text-[0.9rem] text-ink-muted">{row.label}</span>
-                <span className="whitespace-nowrap text-right font-mono text-[1.02rem] font-bold text-ink max-[560px]:text-left">
+                <span className="text-[0.9rem] text-[#8C8A7F]">{row.label}</span>
+                <span className="whitespace-nowrap text-right font-mono text-[1.02rem] font-bold text-cream max-[560px]:text-left">
                   {row.manual}
                 </span>
               </div>
@@ -56,15 +56,15 @@ export function HeroBusinessImpact() {
         </div>
 
         <div
-          className={`flex min-w-0 flex-1 flex-col rounded-[2px] border-[1.5px] border-green p-[1.6rem_1.8rem_1.8rem] max-[560px]:p-[1.3rem_1.3rem_1.5rem] ${fadeUp(
+          className={`flex min-w-0 flex-1 flex-col rounded-xl border border-green p-[1.6rem_1.8rem_1.8rem] max-[560px]:p-[1.3rem_1.3rem_1.5rem] ${fadeUp(
             inView
           )}`}
           style={{
-            backgroundColor: "color-mix(in srgb, hsl(var(--green)) 3%, hsl(var(--cream)))",
+            backgroundColor: "color-mix(in srgb, hsl(var(--green)) 10%, #1B211C)",
             transitionDelay: "200ms",
           }}
         >
-          <span className="mb-[1.6rem] text-[11.5px] font-bold uppercase tracking-[2.5px] text-green">
+          <span className="mb-[1.6rem] text-[11.5px] font-bold uppercase tracking-[2.5px] text-[#4ADE80]">
             With FastQuote
           </span>
           <div className="grid flex-1 gap-[1.5rem] [grid-auto-rows:1fr]">
@@ -73,8 +73,8 @@ export function HeroBusinessImpact() {
                 key={row.label}
                 className="flex items-baseline justify-between gap-[1.2rem] max-[560px]:flex-col max-[560px]:items-start max-[560px]:gap-[0.15rem]"
               >
-                <span className="text-[0.9rem] text-ink-muted">{row.label}</span>
-                <span className="whitespace-nowrap text-right font-mono text-[1.02rem] font-bold text-green max-[560px]:text-left">
+                <span className="text-[0.9rem] text-[#8C8A7F]">{row.label}</span>
+                <span className="whitespace-nowrap text-right font-mono text-[1.02rem] font-bold text-[#4ADE80] max-[560px]:text-left">
                   {row.agent}
                 </span>
               </div>
