@@ -6,6 +6,32 @@ their quote requests.
 
 > **Live app:** _https://email-agent-frontend-delta.vercel.app/_
 
+---
+
+## Landing page redesign — Frontend Engineering Intern assignment
+
+Visual redesign of the FastQuote landing page (`src/components/home/`), built
+with AI-assisted development. All existing copy/headings/labels are unchanged —
+only presentation, layout, and new decorative UI elements were added, per the
+assignment's content-fidelity rule.
+
+**What changed:**
+- Dark theme with a green/gold accent palette, replacing the original light theme
+- Custom animated SVG illustrations (agent robot, growth chart, approval graphic,
+  animated flow-line background) — no stock imagery
+- A "product-in-action" hero: a floating quotation card with a notification card
+  and a live-stat card, all continuously animated
+- An asymmetric bento grid for the Benefits section
+- Scroll-triggered reveal animations throughout, reusing the existing
+  `useInViewOnce` hook
+- Verified responsive at mobile, tablet, and desktop widths
+
+**Screenshot** (mobile view):
+
+![FastQuote landing page redesign](docs-screenshot.png)
+
+---
+
 It is a **static single‑page app**. It has no backend of its own — it talks to
 the **BFF** over HTTP. **BFF = Backend for Frontend**: a backend dedicated to
 this UI that exposes exactly the endpoints it needs (auth, metrics, onboarding,
