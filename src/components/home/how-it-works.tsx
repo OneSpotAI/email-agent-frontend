@@ -28,45 +28,69 @@ export function HowItWorks() {
     <section
       ref={ref}
       id="how-it-works"
-      className="border-t border-[#DAD5C8] bg-[#FCFBF7] py-16 md:py-24"
+      className="border-t border-[#EEE9E0] bg-[#FCFBF7] py-24"
       style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 lg:px-8">
+        {/* Heading */}
         <div
-          className={`mx-auto max-w-xl text-center opacity-100 motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out ${
-            inView ? "" : "motion-safe:-translate-x-10 motion-safe:opacity-0"
+          className={`mx-auto mb-20 max-w-3xl text-center transition-all duration-700 ${
+            inView ? "" : "translate-y-8 opacity-0"
           }`}
         >
           <h2
-            className="text-[1.75rem] font-semibold leading-[1.15] tracking-[-0.5px] text-[#1A1A1A] md:text-[2.5rem]"
-            style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+            className="text-[2.2rem] leading-[1.08] tracking-[-0.04em] text-[#1A1A1A] md:text-[2.8rem]"
+            style={{
+              fontFamily: "'Fraunces', Georgia, serif",
+              fontWeight: 500,
+            }}
           >
             How It Works
           </h2>
+
+          <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-8 text-[#666660]">
+            From receiving an RFQ to sending a polished quotation, FastQuote
+            streamlines every step while keeping your team in complete control.
+          </p>
         </div>
 
-        <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-12">
+        {/* Cards */}
+        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
           {STEPS.map((s, idx) => (
             <div
               key={s.n}
-              className={`opacity-100 motion-safe:transition-all motion-safe:ease-out motion-safe:[transition-duration:800ms] ${
-                inView ? "" : "motion-safe:translate-y-10 motion-safe:opacity-0"
+              className={`transition-all duration-700 ${
+                inView ? "" : "translate-y-8 opacity-0"
               }`}
-              style={{ transitionDelay: `${(idx + 1) * 100}ms` }}
+              style={{
+                transitionDelay: `${idx * 120}ms`,
+              }}
             >
-              <div className="group flex h-full flex-col border-2 border-[#1A1A1A] bg-[#FCFBF7] p-6 transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] hover:bg-[color-mix(in_srgb,#1A1A1A_2%,#FCFBF7)] hover:shadow-[0_10px_30px_rgba(26,26,26,0.07)]">
-                <span
-                  className="flex h-11 w-11 items-center justify-center rounded-full border-[1.5px] border-[#DAD5C8] font-mono text-[16px] font-semibold text-[#9A998F] transition-all duration-300 ease-out group-hover:border-[#1A1A1A] group-hover:bg-[#1A1A1A] group-hover:text-[#FCFBF7] motion-safe:group-hover:scale-110"
-                >
+              <div className="group relative flex h-full flex-col rounded-3xl border border-[#EEE9E0] bg-white/80 p-8 shadow-[0_18px_60px_rgba(26,26,26,0.05)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_32px_80px_rgba(26,26,26,0.08)] md:p-10">
+
+                {/* Step Number */}
+                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-[#D8D2C7] bg-[#FCFBF7] font-mono text-sm font-semibold text-[#7B7B73] transition-all duration-300 group-hover:border-[#1A1A1A] group-hover:bg-[#1A1A1A] group-hover:text-white">
                   {s.n}
-                </span>
+                </div>
+
+                {/* Title */}
                 <h3
-                  className="mt-6 text-[19px] text-[#1A1A1A]"
-                  style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 500 }}
+                  className="mb-4 text-[1.35rem] leading-tight text-[#1A1A1A]"
+                  style={{
+                    fontFamily: "'Fraunces', Georgia, serif",
+                    fontWeight: 500,
+                  }}
                 >
                   {s.title}
                 </h3>
-                <p className="mt-2.5 text-[14.5px] leading-[1.6] text-[#71716A]">{s.description}</p>
+
+                {/* Description */}
+                <p className="flex-1 text-[15px] leading-8 text-[#666660]">
+                  {s.description}
+                </p>
+
+                {/* Bottom Accent */}
+                <div className="mt-8 h-[2px] w-12 rounded-full bg-[#1A1A1A] transition-all duration-300 group-hover:w-20" />
               </div>
             </div>
           ))}

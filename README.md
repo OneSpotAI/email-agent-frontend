@@ -174,3 +174,8 @@ backend repo.)
   branch on hostnames.
 - **CORS only exists in cross‑origin mode.** Same‑origin (`/`) and demo have none.
 - Keep `src/lib/metrics-contract.ts` in sync with the backend contract.
+
+# Frontend Engineering Intern Assignment
+## Landing Page Redesign
+### Desktop
+![Desktop](./screenshots/)

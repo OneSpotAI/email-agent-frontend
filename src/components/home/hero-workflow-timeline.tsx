@@ -1,145 +1,248 @@
 import { useEffect, useRef, useState } from "react";
 
-const STEPS: { actor: string; label: string; you?: boolean }[] = [
-  { actor: "Agent", label: "Reads the email" },
-  { actor: "Agent", label: "Matches your catalog" },
-  { actor: "Agent", label: "Drafts the quotation" },
-  { actor: "You", label: "Review and Approve", you: true },
-  { actor: "Agent", label: "Shares the quotation" },
+const STEPS = [
+  {
+    actor: "Agent",
+    label: "Reads the email",
+  },
+  {
+    actor: "Agent",
+    label: "Matches your catalog",
+  },
+  {
+    actor: "Agent",
+    label: "Drafts the quotation",
+  },
+  {
+    actor: "You",
+    label: "Review and Approve",
+    you: true,
+  },
+  {
+    actor: "Agent",
+    label: "Shares the quotation",
+  },
 ];
 
 const HOLD = [2400, 3000, 3200, 3200, 3400];
 
-const TRACK_COLS = "grid-cols-2 md:grid-cols-3 lg:grid-cols-5";
-
-// At the lg breakpoint dots are pinned to fixed 0/25/50/75/100% points (equal gaps,
-// first and last flush with the line's ends) instead of sitting at grid-column starts.
-const LG_DOT_POSITION = [
-  "lg:left-0 lg:translate-x-0",
-  "lg:left-1/4 lg:-translate-x-1/2",
-  "lg:left-1/2 lg:-translate-x-1/2",
-  "lg:left-3/4 lg:-translate-x-1/2",
-  "lg:left-full lg:-translate-x-full",
-];
-
-// Labels reuse the dots' fixed positions so each one sits directly under its own dot.
-const LG_LABEL_ALIGN = ["lg:text-left", "lg:text-center", "lg:text-center", "lg:text-center", "lg:text-right"];
-
 export function HeroWorkflowTimeline() {
-  const [i, setI] = useState(0);
+  const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
-  const [reduced, setReduced] = useState(false);
-  const railRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
+  const railRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const el = railRef.current;
-    if (!el || !("IntersectionObserver" in window)) return;
-    const obs = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.25 });
-    obs.observe(el);
-    return () => obs.disconnect();
+
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.25,
+      }
+    );
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (reduced || paused || !visible) return;
-    const t = setTimeout(() => setI((n) => (n + 1) % STEPS.length), HOLD[i]);
-    return () => clearTimeout(t);
-  }, [i, paused, visible, reduced]);
+    if (paused || !visible) return;
 
-  const fillPct = (i / (STEPS.length - 1)) * 100;
+    const timer = setTimeout(() => {
+      setCurrent((v) => (v + 1) % STEPS.length);
+    }, HOLD[current]);
+
+    return () => clearTimeout(timer);
+  }, [current, paused, visible]);
+
+  const progress = (current / (STEPS.length - 1)) * 100;
 
   return (
-    <div
+    <section
       ref={railRef}
-      className="mt-11 md:mt-[4.5rem]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      className="mt-16 rounded-3xl border border-[#EEE9E0] bg-white/70 px-6 py-8 shadow-[0_18px_60px_rgba(26,26,26,0.05)] backdrop-blur-sm"
     >
-      {/* Dot track: dots only, one shared grid, so nothing else can affect row height */}
-      <div className={`relative grid gap-x-4 ${TRACK_COLS} lg:h-6`}>
-        <div className="absolute inset-0 hidden items-center lg:flex">
-          <div className="h-px w-full bg-[#DAD5C8]" />
-        </div>
-        <div className="absolute inset-0 hidden items-center lg:flex">
-          <div
-            className="h-[1.5px] bg-[#1A1A1A]"
-            style={{ width: `${fillPct}%`, transition: "width 620ms cubic-bezier(.2,.7,.3,1)" }}
-          />
-        </div>
+      {/* ========================= */}
+      {/* MOBILE */}
+      {/* ========================= */}
 
-        {STEPS.map((s, n) => {
-          const done = n < i;
-          const now = n === i;
+      <div className="space-y-8 lg:hidden">
+        {STEPS.map((step, index) => {
+          const active = index === current;
+          const done = index < current;
+
           return (
             <button
-              key={n}
+              key={index}
               type="button"
-              onClick={() => setI(n)}
-              className={`flex h-6 cursor-pointer items-center border-none bg-none p-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 ${LG_DOT_POSITION[n]}`}
+              onClick={() => setCurrent(index)}
+              className="flex w-full items-start gap-4 bg-transparent text-left"
             >
-              <span
-                className="relative z-10 block h-[11px] w-[11px] rounded-full border-2 transition-colors duration-300"
-                style={{
-                  borderColor: done || now ? "#1A1A1A" : "#DAD5C8",
-                  background: s.you ? "#FCFBF7" : done || now ? "#1A1A1A" : "#FCFBF7",
-                }}
-              >
-                {now && n !== STEPS.length - 1 && (
-                  <span className="absolute -inset-1.5 animate-[qa-ring_2.4s_cubic-bezier(.2,.7,.3,1)_infinite] rounded-full border border-[#1A1A1A] opacity-0" />
+              <div className="flex flex-col items-center">
+                <span
+                  className="relative h-[15px] w-[15px] rounded-full border-2 transition-all duration-500"
+                  style={{
+                    borderColor:
+                      active || done ? "#1A1A1A" : "#DAD5C8",
+                    background:
+                      step.you
+                        ? "#FCFBF7"
+                        : active || done
+                        ? "#1A1A1A"
+                        : "#FCFBF7",
+                    transform: active ? "scale(1.15)" : "scale(1)",
+                  }}
+                >
+                  {active && index !== STEPS.length - 1 && (
+                    <span className="absolute -inset-2 animate-[qa-ring_2.4s_ease-out_infinite] rounded-full border border-[#1A1A1A]" />
+                  )}
+                </span>
+
+                {index !== STEPS.length - 1 && (
+                  <span className="mt-2 h-12 w-[2px] bg-[#E8E2D7]" />
                 )}
-              </span>
+              </div>
+
+              <div className="pb-4">
+                <p
+                  className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                  style={{
+                    color: active ? "#1A1A1A" : "#9A998F",
+                  }}
+                >
+                  {step.actor}
+                </p>
+
+                <h4
+                  className="mt-2 text-[17px] leading-6 transition-all duration-500"
+                  style={{
+                    color: active ? "#1A1A1A" : "#666666",
+                    fontWeight: active ? 600 : 500,
+                  }}
+                >
+                  {step.label}
+                </h4>
+              </div>
             </button>
           );
         })}
       </div>
 
-      {/* Label track: separate grid for mobile/tablet wrap; pinned to the dots' fixed points at lg */}
-      <div className={`relative mt-4 grid gap-x-4 gap-y-8 ${TRACK_COLS} lg:min-h-[3.75rem] lg:gap-y-0`}>
-        {STEPS.map((s, n) => {
-          const done = n < i;
-          const now = n === i;
+      {/* ========================= */}
+      {/* DESKTOP */}
+      {/* ========================= */}
+
+      <div className="relative hidden lg:block">
+        <div className="absolute left-0 right-0 top-[7px] h-[2px] rounded-full bg-[#E8E2D7]" />
+
+        <div
+          className="absolute left-0 top-[7px] h-[2px] rounded-full bg-[#1A1A1A] "
+          style={{  
+  width: `${progress}%`,
+  transition: "width 650ms cubic-bezier(.2,.7,.3,1)",
+}}
+        />
+
+        <div className="relative grid grid-cols-5">
+                  {STEPS.map((step, index) => {
+          const active = index === current;
+          const done = index < current;
+
           return (
             <button
-              key={n}
+              key={index}
               type="button"
-              onClick={() => setI(n)}
-              onFocus={() => setI(n)}
-              className={`block cursor-pointer border-none bg-none p-0 pr-2.5 text-left font-sans lg:w-[15ch] lg:p-0 lg:top-0 ${LG_DOT_POSITION[n]} ${LG_LABEL_ALIGN[n]} lg:absolute`}
+              onClick={() => {
+  setPaused(true);
+  setCurrent(index);
+
+  setTimeout(() => {
+    setPaused(false);
+  }, 300);
+}}
+              className="flex flex-col items-center justify-start rounded-xl bg-transparent hover:-translate-y-1 text-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A1A1A]/20"
             >
               <span
-                className="mb-1.5 block font-mono text-[9.5px] uppercase tracking-[0.14em] transition-colors duration-300"
-                style={{ color: now ? (s.you ? "#1D7A46" : "#1A1A1A") : "#9A998F" }}
-              >
-                {s.actor}
-              </span>
-              <span
-                className="block max-w-[15ch] text-[13.5px] leading-[1.35] transition-colors duration-300 lg:max-w-none"
+                className="relative z-10 h-4 w-4 rounded-full border-2 transition-all duration-500"
                 style={{
-                  color: now ? "#1A1A1A" : done ? "#4A4A45" : "#71716A",
-                  fontWeight: now ? 500 : 400,
+                  borderColor:
+                    active || done ? "#1A1A1A" : "#DAD5C8",
+                  background: step.you
+                    ? "#FCFBF7"
+                    : active || done
+                    ? "#1A1A1A"
+                    : "#FCFBF7",
+                  transform: active ? "scale(1.15)" : "scale(1)",
                 }}
               >
-                {s.label}
+                {active && index !== STEPS.length - 1 && (
+                  <span className="absolute -inset-2 animate-[qa-ring_2.6s_cubic-bezier(.2,.7,.3,1)_infinite] rounded-full border border-[#1A1A1A]" />
+                )}
               </span>
+
+              <div className="mt-8 flex w-full flex-col items-center">
+                <p
+                  className="font-mono text-[10px] uppercase tracking-[0.18em] transition-colors duration-500"
+                  style={{
+                    color: active ? "#1A1A1A" : "#9A998F",
+                  }}
+                >
+                  {step.actor}
+                </p>
+
+                <h4
+                  className="mt-2 max-w-[160px] text-[15px] leading-6 transition-all duration-500"
+                  style={{
+                    color:
+  active
+    ? "#1A1A1A"
+    : done
+    ? "#4A4A45"
+    : "#8A8A84" ,
+                    fontWeight: active ? 600 : 500,
+                  }}
+                >
+                  {step.label}
+                </h4>
+              </div>
             </button>
           );
         })}
+      </div>
       </div>
 
       <style>{`
         @keyframes qa-ring {
-          0% { transform: scale(.6); opacity: .5 }
-          70% { transform: scale(1.15); opacity: 0 }
-          100% { opacity: 0 }
+          0% {
+            transform: scale(.6);
+            opacity: .45;
+          }
+
+          70% {
+            transform: scale(1.2);
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 0;
+          }
         }
+
         @media (prefers-reduced-motion: reduce) {
-          .animate-\\[qa-ring_2\\.4s_cubic-bezier\\(\\.2\\,\\.7\\,\\.3\\,1\\)_infinite\\] { animation: none !important }
+          .animate-\\[qa-ring_2\\.4s_ease-out_infinite\\] {
+            animation: none !important;
+          }
         }
       `}</style>
-    </div>
+    </section>
   );
 }

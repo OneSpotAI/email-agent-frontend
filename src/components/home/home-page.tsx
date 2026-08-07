@@ -7,13 +7,13 @@ import { FinalCta } from "./cta";
 
 export function HomePage() {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
+    <main className="min-h-screen overflow-x-hidden bg-[#FCFBF7] text-[#1A1A1A]">
       <HomeNav />
       <Hero />
       <HowItWorks />
       <Trust />
       <Benefits />
       <FinalCta />
-    </div>
+    </main>
   );
 }

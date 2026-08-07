@@ -4,80 +4,127 @@
 
 @layer base {
   :root {
-    --background: 220 27% 98%;
-    --foreground: 220 43% 11%;
+    --background: 48 45% 98%;
+    --foreground: 0 0% 10%;
+
     --card: 0 0% 100%;
-    --card-foreground: 220 43% 11%;
+    --card-foreground: 0 0% 10%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 220 43% 11%;
-    --primary: 220 43% 11%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 0 0% 10%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 216 24% 96%;
-    --secondary-foreground: 220 43% 11%;
-    --muted: 220 20% 96%;
-    --muted-foreground: 220 14% 40%;
-    --accent: 216 24% 96%;
-    --accent-foreground: 220 43% 11%;
+
+    --secondary: 45 24% 96%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 45 20% 96%;
+    --muted-foreground: 60 3% 43%;
+
+    --accent: 45 20% 96%;
+    --accent-foreground: 0 0% 10%;
+
     --destructive: 4 76% 40%;
     --destructive-foreground: 0 0% 100%;
+
     --warning: 38 92% 50%;
     --warning-foreground: 30 80% 12%;
-    --success: 155 90% 24%;
+
+    --success: 146 62% 30%;
     --success-bg: 145 81% 96%;
+
     --destructive-bg: 5 85% 97%;
+
     --attention: 42 71% 87%;
     --attention-bg: 45 100% 96%;
-    --border: 217 17% 91%;
-    --input: 217 17% 91%;
-    --ring: 220 43% 11%;
-    --radius: 0.625rem;
 
-    /* Broadsheet Light — cream palette, sourced from existing hardcoded hexes in src/components/home */
-    --cream: 48 45% 98%;      /* #FCFBF7 */
-    --hairline: 43 20% 82%;   /* #DAD5C8 */
-    --ink: 0 0% 10%;          /* #1A1A1A */
-    --ink-muted: 60 3% 43%;   /* #71716A */
-    --gold: 46 27% 53%;       /* #A89968 — new, scoped to benefits.tsx only */
-    --green: 146 62% 30%;     /* #1D7A46 — from hero-business-impact.tsx QuoteAgent column, scoped to the before/after panels */
+    --border: 43 20% 88%;
+    --input: 43 20% 88%;
+    --ring: 0 0% 10%;
+
+    --radius: 1rem;
+
+    --cream: 48 45% 98%;
+    --hairline: 43 20% 86%;
+    --ink: 0 0% 10%;
+    --ink-muted: 60 3% 43%;
+    --green: 146 62% 30%;
+    --gold: 46 27% 53%;
   }
 
-  .dark {
-    --background: 222 20% 9%;
-    --foreground: 216 20% 95%;
-    --card: 220 18% 13%;
-    --card-foreground: 216 20% 95%;
-    --popover: 220 18% 13%;
-    --popover-foreground: 216 20% 95%;
-    --primary: 210 20% 98%;
-    --primary-foreground: 220 20% 10%;
-    --secondary: 217 16% 16%;
-    --secondary-foreground: 216 20% 95%;
-    --muted: 217 14% 16%;
-    --muted-foreground: 218 12% 68%;
-    --accent: 217 16% 16%;
-    --accent-foreground: 216 20% 95%;
-    --destructive: 4 65% 58%;
-    --destructive-foreground: 0 0% 100%;
-    /* Amber promoted to a deliberate "needs attention" token; foreground is dark for solid fills. */
-    --warning: 38 92% 50%;
-    --warning-foreground: 38 92% 8%;
-    --success: 150 40% 48%;
-    --success-bg: 152 35% 15%;
-    --destructive-bg: 6 50% 18%;
-    --attention: 39 65% 52%;
-    --attention-bg: 30 40% 16%;
-    --border: 217 16% 22%;
-    --input: 217 16% 22%;
-    --ring: 210 20% 98%;
+  * {
+    @apply border-border;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      box-shadow 250ms ease,
+      transform 250ms ease;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.12);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fcfbf7;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d7d2c8;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #bdb7ab;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+@layer components {
+
+  .surface-card {
+    @apply rounded-3xl border border-[#EEE9E0] bg-white/80 backdrop-blur-sm shadow-[0_18px_60px_rgba(26,26,26,0.05)] transition-all duration-500;
   }
-  body {
-    @apply bg-background font-sans text-foreground;
+
+  .surface-card-hover {
+    @apply hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_32px_80px_rgba(26,26,26,0.08)];
+  }
+
+  .primary-btn {
+    @apply inline-flex items-center justify-center rounded-2xl bg-[#1A1A1A] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_20px_40px_rgba(26,26,26,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A1A1A]/20;
+  }
+
+  .secondary-btn {
+    @apply inline-flex items-center justify-center rounded-2xl border border-[#E5E0D7] bg-white px-6 py-3 text-sm font-medium text-[#1A1A1A] transition-all duration-300 hover:bg-[#F7F5EF] hover:shadow-md;
+  }
+
+  .section-heading {
+    @apply text-[2.2rem] leading-[1.1] tracking-[-0.04em] md:text-[2.8rem];
+  }
+
+  .section-container {
+    @apply container mx-auto px-6 lg:px-8;
   }
 }
