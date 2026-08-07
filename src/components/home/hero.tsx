@@ -8,41 +8,63 @@ export function Hero() {
   const { ref, inView } = useInViewOnce<HTMLDivElement>();
 
   return (
-    <section className="bg-[#FCFBF7] px-4 py-11 md:py-[4.75rem]" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-      <div className="container mx-auto">
+    <section
+      className="bg-[#FCFBF7] py-20 md:py-28"
+      style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+    >
+      <div className="container mx-auto px-6 lg:px-8">
+
         <div
           ref={ref}
-          className={`opacity-100 motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out ${
-            inView ? "" : "motion-safe:-translate-x-10 motion-safe:opacity-0"
+          className={`max-w-[760px] transition-all duration-700 ease-out ${
+            inView
+              ? "translate-y-0 opacity-100"
+              : "translate-y-6 opacity-0"
           }`}
         >
           <h1
-            className="max-w-[19ch] text-[2.25rem] leading-[1.03] tracking-[-0.018em] text-[#1A1A1A] md:text-[3.5rem]"
-            style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 400 }}
+            className="max-w-[12ch] text-[3rem] leading-[0.95] tracking-[-0.055em] text-[#1A1A1A] sm:text-[3.75rem] lg:text-[4.2rem]"
+            style={{
+              fontFamily: "'Fraunces', Georgia, serif",
+              fontWeight: 400,
+            }}
           >
-            Enterprise Quoting. Automated.
+            Enterprise Quoting.
+            <br />
+            Automated.
           </h1>
-          <p
-            className="mt-5 max-w-[44ch] text-[17px] italic leading-[1.5] text-[#43433E] md:text-[20px]"
-            style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-          >
-            FastQuote prepares complete quotations from incoming RFQs using your
-            catalog, pricing, and branding.
+
+          <p className="mt-7 max-w-[620px] text-[18px] leading-8 text-[#5B5B55] lg:text-[19px]">
+            FastQuote prepares complete quotations from incoming RFQs using
+            your catalog, pricing, and branding.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-6">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <button
               type="button"
               onClick={() => navigate("/register")}
-              className="inline-flex items-center gap-2.5 rounded-[2px] border-[1.5px] border-[#1A1A1A] bg-[#1A1A1A] px-6 py-3.5 text-[15px] font-medium text-[#FCFBF7] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#FCFBF7] hover:text-[#1A1A1A] hover:shadow-[0_12px_32px_rgba(26,26,26,0.15)]"
+              className="group inline-flex items-center gap-2 rounded-2xl bg-[#1A1A1A] px-7 py-3.5 text-[15px] font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_20px_40px_rgba(26,26,26,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A1A1A]/30 focus-visible:ring-offset-2"
             >
-              Get started<span aria-hidden="true">→</span>
+              Get started
+
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
             </button>
           </div>
         </div>
 
+        <div className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-[#DDD8CC] to-transparent" />
+
         <HeroWorkflowTimeline />
-        <HeroBusinessImpact />
+
+        <div className="mt-24">
+          <HeroBusinessImpact />
+        </div>
+
       </div>
     </section>
   );

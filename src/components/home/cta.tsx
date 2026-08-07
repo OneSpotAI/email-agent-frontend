@@ -9,39 +9,69 @@ export function FinalCta() {
   return (
     <section
       ref={ref}
-      className="border-t border-[#DAD5C8] bg-[#FCFBF7] py-20 md:py-28"
+      className="border-t border-[#EEE9E0] bg-[#FCFBF7] py-28"
       style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 lg:px-8">
         <div
-          className={`mx-auto max-w-4xl opacity-100 motion-safe:transition-all motion-safe:ease-out motion-safe:[transition-duration:800ms] ${
-            inView ? "" : "motion-safe:translate-y-10 motion-safe:opacity-0"
+          className={`transition-all duration-700 ${
+            inView ? "" : "translate-y-8 opacity-0"
           }`}
         >
-          <div className="group grid grid-cols-1 items-center gap-6 border border-[#DAD5C8] border-l-[6px] border-l-[#1A1A1A] bg-[#FCFBF7] px-6 py-8 shadow-[0_12px_32px_rgba(26,26,26,0.04)] transition-shadow duration-300 ease-out hover:shadow-[0_16px_48px_rgba(26,26,26,0.08)] sm:grid-cols-[60px_1fr_auto] sm:gap-10 sm:px-10 sm:py-12">
-            <div className="hidden h-[60px] w-[60px] items-center justify-center rounded-[2px] bg-[#F5F3EC] transition-transform duration-300 ease-out group-hover:scale-105 sm:flex">
-              <MailIcon className="h-8 w-8 text-[#1A1A1A]" strokeWidth={1.5} />
-            </div>
+          <div className="relative overflow-hidden rounded-3xl border border-[#EEE9E0] bg-white/80 p-8 shadow-[0_18px_60px_rgba(26,26,26,0.05)] backdrop-blur-sm md:p-12">
 
-            <div>
-              <h2
-                className="text-[20px] leading-[1.25] tracking-[-0.01em] text-[#1A1A1A] md:text-[24px]"
-                style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 500 }}
+            {/* Decorative Glow */}
+            <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#1D7A46]/5 blur-3xl" />
+
+            <div className="relative flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
+
+              {/* Left */}
+              <div className="flex items-start gap-5">
+
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#EEE9E0] bg-[#FCFBF7] shadow-sm">
+                  <MailIcon
+                    className="h-7 w-7 text-[#1A1A1A]"
+                    strokeWidth={1.6}
+                  />
+                </div>
+
+                <div>
+                  <h2
+                    className="max-w-[14ch] text-[2rem] leading-[1.1] tracking-[-0.04em] text-[#1A1A1A] md:text-[2.5rem]"
+                    style={{
+                      fontFamily: "'Fraunces', Georgia, serif",
+                      fontWeight: 500,
+                    }}
+                  >
+                    Connect your inbox and upload your catalog.
+                  </h2>
+
+                  <p className="mt-5 max-w-xl text-[16px] leading-8 text-[#666660]">
+                    Start using FastQuote in minutes. We'll prepare your first
+                    20 quotations at no cost so you can experience the complete
+                    workflow before committing.
+                  </p>
+                </div>
+
+              </div>
+
+              {/* CTA */}
+              <button
+                type="button"
+                onClick={() => navigate("/register")}
+                className="group inline-flex items-center justify-center self-start rounded-2xl bg-[#1A1A1A] px-8 py-4 text-[15px] font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-black hover:shadow-[0_20px_40px_rgba(26,26,26,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A1A1A]/20 focus-visible:ring-offset-2"
               >
-                Connect your inbox and upload your catalog.
-              </h2>
-              <p className="mt-3 max-w-md text-[14.5px] leading-[1.6] text-[#71716A] transition-colors duration-300 ease-out group-hover:text-[#5C5C55]">
-                We'll prepare your first 20 quotations at no cost.
-              </p>
-            </div>
+                Start setup
 
-            <button
-              type="button"
-              onClick={() => navigate("/register")}
-              className="inline-flex items-center justify-center gap-2.5 rounded-[2px] border-[1.5px] border-[#1A1A1A] bg-[#1A1A1A] px-7 py-3.5 text-[15px] font-medium text-[#FCFBF7] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#FCFBF7] hover:text-[#1A1A1A] hover:shadow-[0_12px_32px_rgba(26,26,26,0.15)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#1A1A1A] active:translate-y-0 active:shadow-none sm:w-auto"
-            >
-              Start setup<span aria-hidden="true">→</span>
-            </button>
+                <span
+                  className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </button>
+
+            </div>
           </div>
         </div>
       </div>
