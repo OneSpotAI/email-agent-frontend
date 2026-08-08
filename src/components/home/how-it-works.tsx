@@ -28,7 +28,7 @@ export function HowItWorks() {
     <section
       ref={ref}
       id="how-it-works"
-      className="border-t border-[#DAD5C8] bg-[#FCFBF7] py-16 md:py-24"
+      className="section-fade-cream border-t border-[#DAD5C8] py-16 md:py-24"
       style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
     >
       <div className="container mx-auto px-4">
@@ -54,7 +54,7 @@ export function HowItWorks() {
               }`}
               style={{ transitionDelay: `${(idx + 1) * 100}ms` }}
             >
-              <div className="group flex h-full flex-col border-2 border-[#1A1A1A] bg-[#FCFBF7] p-6 transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] hover:bg-[color-mix(in_srgb,#1A1A1A_2%,#FCFBF7)] hover:shadow-[0_10px_30px_rgba(26,26,26,0.07)]">
+              <div className="group flex h-full flex-col rounded-xl border-2 border-[#1A1A1A] bg-[#FCFBF7] p-6 transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] hover:bg-[color-mix(in_srgb,#1A1A1A_2%,#FCFBF7)] hover:shadow-[0_10px_30px_rgba(26,26,26,0.07)]">
                 <span
                   className="flex h-11 w-11 items-center justify-center rounded-full border-[1.5px] border-[#DAD5C8] font-mono text-[16px] font-semibold text-[#9A998F] transition-all duration-300 ease-out group-hover:border-[#1A1A1A] group-hover:bg-[#1A1A1A] group-hover:text-[#FCFBF7] motion-safe:group-hover:scale-110"
                 >

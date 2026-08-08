@@ -30,7 +30,7 @@ export function Trust() {
     <section
       ref={ref}
       id="trust"
-      className="border-t border-hairline bg-cream py-16 md:py-24"
+      className="section-fade-cream border-t border-hairline py-16 md:py-24"
       style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
     >
       <div className="container mx-auto px-4">
@@ -58,7 +58,7 @@ export function Trust() {
                 style={{ transitionDelay: `${(idx + 1) * 100}ms` }}
               >
                 <div
-                  className="flex h-full min-h-[180px] flex-col border-2 border-ink bg-cream p-6 transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] hover:bg-[color-mix(in_srgb,hsl(var(--ink))_2%,hsl(var(--cream)))] hover:shadow-[0_10px_30px_rgba(26,26,26,0.07)]"
+                  className="flex h-full min-h-[180px] flex-col rounded-xl border-2 border-ink bg-cream p-6 transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] hover:bg-[color-mix(in_srgb,hsl(var(--ink))_2%,hsl(var(--cream)))] hover:shadow-[0_10px_30px_rgba(26,26,26,0.07)]"
                 >
                   <h3 className="mb-3 text-[19px] font-medium text-ink" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
                     {p.title}

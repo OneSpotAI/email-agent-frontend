@@ -56,7 +56,7 @@ export function HeroBusinessImpact() {
         </div>
 
         <div
-          className={`flex min-w-0 flex-1 flex-col rounded-[2px] border-[1.5px] border-green p-[1.6rem_1.8rem_1.8rem] max-[560px]:p-[1.3rem_1.3rem_1.5rem] ${fadeUp(
+          className={`flex min-w-0 flex-1 flex-col rounded-xl border-[1.5px] border-ink p-[1.6rem_1.8rem_1.8rem] max-[560px]:p-[1.3rem_1.3rem_1.5rem] ${fadeUp(
             inView
           )}`}
           style={{
