@@ -70,7 +70,7 @@
     --input: 217 16% 22%;
     --ring: 210 20% 98%;
   }
-}
+} 
 
 @layer base {
   * {
@@ -79,5 +79,16 @@
   }
   body {
     @apply bg-background font-sans text-foreground;
+  }
+}
+@layer utilities {
+  /* Subtle section backdrop built only from existing tokens (cream/ink),
+     used to break up flat repeated section backgrounds without adding new colors. */
+  .section-fade-cream {
+    background-image: radial-gradient(
+      120% 100% at 50% 0%,
+      color-mix(in srgb, hsl(var(--ink)) 3%, hsl(var(--cream))),
+      hsl(var(--cream)) 55%
+    );
   }
 }

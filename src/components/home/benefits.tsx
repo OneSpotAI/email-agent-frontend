@@ -52,7 +52,7 @@ export function Benefits() {
                 }`}
                 style={{ transitionDelay: `${(idx + 1) * 100}ms` }}
               >
-                <div className="flex h-full min-h-[180px] flex-col border-2 border-ink bg-cream p-6 transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] hover:bg-[color-mix(in_srgb,hsl(var(--ink))_2%,hsl(var(--cream)))] hover:shadow-[0_10px_30px_rgba(26,26,26,0.07)]">
+                <div className="flex h-full min-h-[180px] flex-col rounded-xl border-2 border-ink bg-cream p-6 transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] hover:bg-[color-mix(in_srgb,hsl(var(--ink))_2%,hsl(var(--cream)))] hover:shadow-[0_10px_30px_rgba(26,26,26,0.07)]">
                   <h3 className="mb-[0.9rem] text-[1.05rem] font-bold text-ink">{b.title}</h3>
                   <p className="text-[0.93rem] leading-[1.75] text-ink-muted">{b.description}</p>
                 </div>

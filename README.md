@@ -13,6 +13,16 @@ uploads) and hides everything else — Postgres, Gmail, the agent daemon — beh
 it. The whole UI can also run with **zero backend** in a bundled demo mode,
 which makes local development and previews trivial.
 
+## Landing Page Redesign
+![Redesigned landing page](docs/redesign.png)
+
+Changes made:
+- Sticky nav with scroll blur
+- Added product mockup visual to hero
+- Unified card design system across How It Works / Trust / Benefits
+- Added gradient accent to final CTA
+- Verified responsive at mobile/tablet/desktop breakpoints
+
 ---
 
 ## Tech stack
